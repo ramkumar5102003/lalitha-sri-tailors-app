@@ -15,6 +15,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # --- THIS IS THE FIX ---
+      # The container runs as user 1000. We must change ownership 
+      # of the files on the host so the container can access them.
+      - name: Fix Permissions
+        run: |
+          sudo chown -R 1000:1000 .
+
       - name: Free Disk Space
         run: |
           sudo rm -rf /usr/share/dotnet
