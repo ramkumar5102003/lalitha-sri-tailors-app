@@ -2,35 +2,35 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Prepare for Buildozer
+      - name: Free Disk Space
         run: |
-          sudo rm -rf .buildozer bin
-          sudo chown -R 1000:1000 ${{ github.workspace }}
-          sudo chmod -R 777 ${{ github.workspace }}
-          echo "✅ Workspace ready"
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
-      - name: Build RELEASE APK
-        run: |
-          docker run --rm \
-            -v ${{ github.workspace }}:/home/user/hostcwd \
-            -w /home/user/hostcwd \
-            ghcr.io/kivy/buildozer:latest \
-            buildozer android release
+      - name: Build with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
+        with:
+          command: buildozer android debug
+          buildozer_version: master
 
-      - name: Upload APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: LalithaSriTailors-RELEASE-APK
-          path: bin/*-release.apk
-          if-no-files-found: error          if-no-files-found: error
+          name: LalithaTailors-APK
+          path: bin/*.apk
