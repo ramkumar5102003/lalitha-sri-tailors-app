@@ -13,8 +13,10 @@ package.domain = org.lalitha
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-# CRITICAL: Added 'ttf' for Telugu font and 'json' for history
 source.include_exts = py,png,jpg,kv,atlas,ttf,json
+
+# (str) Application versioning (method 1)
+version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
@@ -64,6 +66,10 @@ android.ndk = 25b
 # (bool) Use --private data storage (True) or --dir public storage (False)
 android.private_storage = True
 
+# (bool) Accept SDK license agreements automatically
+# CRITICAL: This fixes the "Broken pipe" / license hanging issues
+android.accept_sdk_license = True
+
 # (str) The format used to package the app for release mode (aab or apk or aar).
 android.release_artifact = apk
 
@@ -97,47 +103,4 @@ p4a.branch = master
 log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
-# CRITICAL FIX: Set to 0 to prevent GitHub Actions permission errors
 warn_on_root = 0
-
-# (str) Path to build artifact storage, absolute or relative to spec file
-# build_dir = ./.buildozer
-
-# (str) Path to build output storage, absolute or relative to spec file
-# bin_dir = ./bin
-
-#    -----------------------------------------------------------------------------
-#    List as sections
-#
-#    You can define all the "list" as [section:key].
-#    Each line will be considered as a option to the list.
-#    Let's take [app] / source.exclude_patterns.
-#    Instead of doing:
-#
-#        [app]
-#        source.exclude_patterns = license,data/audio/*.wav,data/images/original/*
-#
-#    You can do:
-#
-#        [app:source.exclude_patterns]
-#        license
-#        data/audio/*.wav
-#        data/images/original/*
-#
-#    -----------------------------------------------------------------------------
-#    Profiles
-#
-#    You can extend section / key with a profile
-#    For example, you want to deploy a demo version of your application without
-#    HD content. You could first change the title to add "(demo)" in the name
-#    and extend the excluded directories to remove the HD content.
-#
-#        [app@demo]
-#        title = My Application (demo)
-#
-#        [app:source.exclude_patterns@demo]
-#        images/hd/*
-#
-#    Then, invoke buildozer with the "demo" profile:
-#
-#        buildozer --profile demo android debug
