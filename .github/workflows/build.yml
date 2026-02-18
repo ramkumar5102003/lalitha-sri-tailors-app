@@ -26,7 +26,7 @@ jobs:
             -v ${{ github.workspace }}:/home/user/hostcwd \
             -w /home/user/hostcwd \
             ghcr.io/kivy/buildozer:latest \
-            android release
+            sh -c "yes | ~/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses && buildozer android release"
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
