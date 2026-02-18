@@ -1,4 +1,5 @@
 [app]
+
 title = లలిత శ్రీ టైలర్స్
 package.name = lalithasritailors
 package.domain = org.example
@@ -12,6 +13,11 @@ android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 android.api = 34
 android.minapi = 26
 android.ndk_api = 26
+
+# 🔥 Fixed stable versions (this solves aidl error)
+android.build_tools = 34.0.0
+android.platform = 34
+
 fullscreen = 0
 orientation = portrait
 
