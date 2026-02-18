@@ -1,26 +1,91 @@
 [app]
 
-title = లలిత శ్రీ టైలర్స్
-package.name = lalithasritailors
-package.domain = org.example
-version = 1.0
+# (str) Title of your application
+title = Lalitha Tailors
+
+# (str) Package name
+package.name = lalithatailors
+
+# (str) Package domain (needed for android/ios packaging)
+package.domain = org.lalitha
+
+# (str) Source code where the main.py live
 source.dir = .
+
+# (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,atlas,ttf,json
 
-requirements = python3,kivy==2.3.0,plyer==2.1.0
+# (list) Application requirements
+# comma separated e.g. requirements = sqlite3,kivy
+requirements = python3,kivy==2.3.0,plyer,android
 
-android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
-android.api = 34
-android.minapi = 26
-android.ndk_api = 26
+# (str) Custom source folders for requirements
+# Sets custom source for any requirements with recipes
+# requirements.source.kivy = ../../kivy
 
-# 🔥 This automatically accepts all SDK licenses (fixes aidl & license error)
-android.accept_sdk_license = True
+# (list) Garden requirements
+#garden_requirements =
 
-android.build_tools = 34.0.0
-android.platform = 34
+# (str) Presplash of the application
+#presplash.filename = %(source.dir)s/data/presplash.png
 
-fullscreen = 0
+# (str) Icon of the application
+#icon.filename = %(source.dir)s/data/icon.png
+
+# (list) Supported orientations
+# Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
 orientation = portrait
 
-icon.filename = %(source.dir)s/logo.png
+# (bool) Indicate if the application should be fullscreen or not
+fullscreen = 0
+
+# (string) Presplash background color (for android)
+# Supported formats are: #RRGGBB #AARRGGBB or one of the following names:
+# red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
+# darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
+# olive, purple, silver, teal.
+android.presplash_color = #FFFFFF
+
+# (list) Permissions
+android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
+
+# (int) Target Android API, should be as high as possible.
+android.api = 34
+
+# (int) Minimum API your APK will support.
+android.minapi = 24
+
+# (str) Android NDK version to use
+android.ndk = 25b
+
+# (bool) Use --private data storage (True) or --dir public storage (False)
+android.private_storage = True
+
+# (str) The format used to package the app for release mode (aab or apk or aar).
+android.release_artifact = apk
+
+# (str) The format used to package the app for debug mode (apk or aar).
+android.debug_artifact = apk
+
+# (list) List of Java classes to add to the compilation
+#android.add_src =
+
+# (list) Java classes to exclude from the compilation
+#android.rm_src =
+
+# (list) Gradle dependencies to add
+#android.gradle_dependencies =
+
+# (list) The Android Archs to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
+android.archs = arm64-v8a, armeabi-v7a
+
+# (bool) enables Android auto backup feature (Android API >= 23)
+android.allow_backup = True
+
+[buildozer]
+
+# (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
+log_level = 2
+
+# (int) Display warning if buildozer is run as root (0 = False, 1 = True)
+warn_on_root = 1
