@@ -14,7 +14,9 @@ android.api = 34
 android.minapi = 26
 android.ndk_api = 26
 
-# 🔥 Fixed stable versions (this solves aidl error)
+# 🔥 This automatically accepts all SDK licenses (fixes aidl & license error)
+android.accept_sdk_license = True
+
 android.build_tools = 34.0.0
 android.platform = 34
 
