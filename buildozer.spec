@@ -13,6 +13,7 @@ package.domain = org.lalitha
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
+# CRITICAL: Added 'ttf' for Telugu font and 'json' for history
 source.include_exts = py,png,jpg,kv,atlas,ttf,json
 
 # (list) Application requirements
@@ -50,9 +51,11 @@ android.presplash_color = #FFFFFF
 android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 
 # (int) Target Android API, should be as high as possible.
+# API 34 = Android 14
 android.api = 34
 
 # (int) Minimum API your APK will support.
+# API 24 = Android 7.0
 android.minapi = 24
 
 # (str) Android NDK version to use
@@ -77,10 +80,16 @@ android.debug_artifact = apk
 #android.gradle_dependencies =
 
 # (list) The Android Archs to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
+# CRITICAL: Must include arm64-v8a for modern phones
 android.archs = arm64-v8a, armeabi-v7a
 
 # (bool) enables Android auto backup feature (Android API >= 23)
 android.allow_backup = True
+
+# (str) python-for-android branch to use
+# CRITICAL FIX: 'master' branch fixes the Gradle/Java errors on API 34
+p4a.branch = master
+
 
 [buildozer]
 
@@ -88,4 +97,47 @@ android.allow_backup = True
 log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
+# CRITICAL FIX: Set to 0 to prevent GitHub Actions permission errors
 warn_on_root = 0
+
+# (str) Path to build artifact storage, absolute or relative to spec file
+# build_dir = ./.buildozer
+
+# (str) Path to build output storage, absolute or relative to spec file
+# bin_dir = ./bin
+
+#    -----------------------------------------------------------------------------
+#    List as sections
+#
+#    You can define all the "list" as [section:key].
+#    Each line will be considered as a option to the list.
+#    Let's take [app] / source.exclude_patterns.
+#    Instead of doing:
+#
+#        [app]
+#        source.exclude_patterns = license,data/audio/*.wav,data/images/original/*
+#
+#    You can do:
+#
+#        [app:source.exclude_patterns]
+#        license
+#        data/audio/*.wav
+#        data/images/original/*
+#
+#    -----------------------------------------------------------------------------
+#    Profiles
+#
+#    You can extend section / key with a profile
+#    For example, you want to deploy a demo version of your application without
+#    HD content. You could first change the title to add "(demo)" in the name
+#    and extend the excluded directories to remove the HD content.
+#
+#        [app@demo]
+#        title = My Application (demo)
+#
+#        [app:source.exclude_patterns@demo]
+#        images/hd/*
+#
+#    Then, invoke buildozer with the "demo" profile:
+#
+#        buildozer --profile demo android debug
