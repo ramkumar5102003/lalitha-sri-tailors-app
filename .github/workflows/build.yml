@@ -27,14 +27,16 @@ jobs:
           python-version: '3.10'
 
       # 3. Install System Dependencies
-      # FIXED: Removed 'libtinfo5' (deprecated) -> Use 'libncurses-dev'
+      # CRITICAL FIX: Added 'libltdl-dev' and 'automake'.
+      # These contain the missing LT_SYS_SYMBOL_USCORE macros.
       - name: Install System Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             build-essential git zip unzip autoconf libtool \
             pkg-config zlib1g-dev libncurses-dev \
-            cmake libffi-dev libssl-dev
+            cmake libffi-dev libssl-dev \
+            libltdl-dev automake
 
       # 4. Install Buildozer
       - name: Install Buildozer
@@ -44,7 +46,6 @@ jobs:
 
       # 5. Build APK
       # We disable the Gradle Daemon to prevent hanging (0% Waiting error)
-      # We removed "yes |" because the spec file now handles licenses
       - name: Build APK
         env:
           GRADLE_OPTS: "-Dorg.gradle.daemon=false -Xmx2048m"
