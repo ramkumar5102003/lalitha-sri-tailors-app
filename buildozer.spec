@@ -15,49 +15,36 @@ source.dir = .
 # (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,atlas,ttf,json
 
-# (str) Application versioning (method 1)
+# (str) Application versioning
 version = 1.0
 
 # (list) Application requirements
-# comma separated e.g. requirements = sqlite3,kivy
 requirements = python3,kivy==2.3.0,plyer,android
 
-# (str) Custom source folders for requirements
-# Sets custom source for any requirements with recipes
-# requirements.source.kivy = ../../kivy
+# (str) Presplash of the application (The loading screen)
+# ENABLED: This will show your logo when the app opens
+presplash.filename = %(source.dir)s/logo.png
 
-# (list) Garden requirements
-#garden_requirements =
-
-# (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
-
-# (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
+# (str) Icon of the application (The app icon on the phone's home screen)
+# ENABLED: This sets your logo as the app icon
+icon.filename = %(source.dir)s/logo.png
 
 # (list) Supported orientations
-# Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
 orientation = portrait
 
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 0
 
 # (string) Presplash background color (for android)
-# Supported formats are: #RRGGBB #AARRGGBB or one of the following names:
-# red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
-# darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
-# olive, purple, silver, teal.
 android.presplash_color = #FFFFFF
 
 # (list) Permissions
 android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 
 # (int) Target Android API, should be as high as possible.
-# API 34 = Android 14
 android.api = 34
 
 # (int) Minimum API your APK will support.
-# API 24 = Android 7.0
 android.minapi = 24
 
 # (str) Android NDK version to use
@@ -67,7 +54,6 @@ android.ndk = 25b
 android.private_storage = True
 
 # (bool) Accept SDK license agreements automatically
-# CRITICAL: This fixes the "Broken pipe" / license hanging issues
 android.accept_sdk_license = True
 
 # (str) The format used to package the app for release mode (aab or apk or aar).
@@ -76,24 +62,13 @@ android.release_artifact = apk
 # (str) The format used to package the app for debug mode (apk or aar).
 android.debug_artifact = apk
 
-# (list) List of Java classes to add to the compilation
-#android.add_src =
-
-# (list) Java classes to exclude from the compilation
-#android.rm_src =
-
-# (list) Gradle dependencies to add
-#android.gradle_dependencies =
-
 # (list) The Android Archs to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
-# CRITICAL: Must include arm64-v8a for modern phones
 android.archs = arm64-v8a, armeabi-v7a
 
 # (bool) enables Android auto backup feature (Android API >= 23)
 android.allow_backup = True
 
 # (str) python-for-android branch to use
-# CRITICAL FIX: 'master' branch fixes the Gradle/Java errors on API 34
 p4a.branch = master
 
 
