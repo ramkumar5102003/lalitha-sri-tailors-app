@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-    # THE FIX: Using 22.04 instead of latest prevents the silent compiler crashes
     runs-on: ubuntu-22.04
 
     steps:
@@ -38,12 +37,22 @@ jobs:
           pip install --upgrade pip
           pip install buildozer cython
 
+      # We route the output to a text file so we can actually read it
       - name: Build APK
         run: |
-          buildozer android debug
-          
+          buildozer android debug > buildozer_log.txt 2>&1
+
       - name: Upload APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: LalithaTailors-APK
           path: bin/*.apk
+
+      # If it fails, upload the log file instead so we can find the real error
+      - name: Upload Error Log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build-Error-Log
+          path: buildozer_log.txt
