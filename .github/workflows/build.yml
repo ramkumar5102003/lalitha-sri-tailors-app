@@ -47,13 +47,12 @@ jobs:
 
       # 5. Build APK
       # We force the Gradle Daemon off to prevent memory crashes
+      # 5. Build APK
       - name: Build APK
         env:
           GRADLE_OPTS: "-Dorg.gradle.daemon=false -Xmx2048m"
         run: |
-          # 'yes' is used just in case a license prompt appears, though spec handles it too
-          yes | buildozer android debug --log_level 2
-          
+          buildozer android debug --log_level 2
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
